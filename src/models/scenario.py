@@ -29,9 +29,28 @@ class Scenario():
         for i in range(self.__matrix.shape[0]):
             for j in range(self.__matrix.shape[1]):
                 if self.__matrix[i][j] == 1:
-                    pygame.draw.rect(screen, colors.RED, (temp_x, temp_y, self.__cell_width, self.__cell_height))
+                    pygame.draw.rect(screen, colors.BLACK, (temp_x, temp_y, self.__cell_width, self.__cell_height))
                 else:
-                    pygame.draw.rect(screen, colors.BLUE, (temp_x, temp_y, self.__cell_width, self.__cell_height))
+                    pygame.draw.rect(screen, colors.WHITE, (temp_x, temp_y, self.__cell_width, self.__cell_height))
                 temp_x += self.__cell_width
             temp_x = 0
             temp_y += self.__cell_height
+
+    def allow_movement(self, intend_position: tuple[int]) -> tuple[int]:
+        intend_pos_on_matrix = self.__convert_pixel_position_to_matrix_position(intend_position)
+        if self.__matrix[intend_pos_on_matrix[0], intend_pos_on_matrix[1]] == 0:
+            return True
+        else:
+            return False
+
+    def __convert_pixel_position_to_matrix_position(self, pixel_position: tuple[int]) -> tuple[int]:
+        x = pixel_position[0]
+        y = pixel_position[1]
+        row = x // self.__cell_width
+        column = y // self.__cell_height
+        return (row, column)
+    
+    def __convert_matrix_position_to_matrix_position(self, matrix_position: tuple[int]) -> tuple[int]:
+        x = ((matrix_position[1] + 1) * self.cell_width) - (self.cell_width // 2)
+        y = ((matrix_position[0] + 1) * self.cell_height) - (self.cell_height // 2)
+        return (x, y)

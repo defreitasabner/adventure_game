@@ -11,7 +11,7 @@ screen = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT)
 clock = pygame.time.Clock()
 
 matrix_generator = MatrixGenerator()
-scenario = Scenario(size = 25, matrix = matrix_generator.generate_random_matrix(25))
+scenario = Scenario(size = 20, matrix = matrix_generator.generate_simple_arena(20))
 
 actor = Actor((settings.SCREEN_WIDTH // 2, settings.SCREEN_HEIGHT // 2))
 
@@ -24,7 +24,7 @@ while running:
     scenario.draw_grid(screen)
 
     actor.draw(screen)
-    actor.event_handler()
+    actor.movement_request()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
