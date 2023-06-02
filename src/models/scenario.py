@@ -6,15 +6,15 @@ from numpy import ndarray
 from constants import settings, colors
 
 class Scenario():
-    def __init__(self, size: int = 25, matrix = None) -> None:
+    def __init__(self, size: int = 25, matrix: ndarray | None = None) -> None:
         self.__cell_width = settings.SCREEN_WIDTH // size
         self.__cell_height = settings.SCREEN_HEIGHT // size
-        if matrix:
+        if type(matrix) == ndarray:
             self.__matrix = matrix
         else:
             self.__matrix: ndarray = np.array([np.zeros(size, dtype=int) for _ in range(size)])
 
-    def draw_grid(self, screen: Surface):
+    def draw_grid(self, screen: Surface) -> None:
         temp_x = 0
         temp_y = 0
         for _ in range(self.__matrix.shape[0]):
@@ -23,7 +23,7 @@ class Scenario():
             pygame.draw.line(screen, colors.WHITE, (0, temp_y), (settings.SCREEN_WIDTH, temp_y))
             pygame.draw.line(screen, colors.WHITE, (temp_x, 0), (temp_x, settings.SCREEN_HEIGHT))
 
-    def draw(self, screen: Surface):
+    def draw(self, screen: Surface) -> None:
         temp_x = 0
         temp_y = 0
         for i in range(self.__matrix.shape[0]):
