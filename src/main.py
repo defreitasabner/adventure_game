@@ -24,7 +24,10 @@ while running:
     scenario.draw_grid(screen)
 
     actor.draw(screen)
-    actor.movement_request()
+    if scenario.allow_movement(actor.movement_request()):
+        actor.move()
+    else:
+        actor.colide()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
