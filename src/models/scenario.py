@@ -37,11 +37,12 @@ class Scenario():
             temp_y += self.__cell_height
 
     def allow_movement(self, intend_position: tuple[int]) -> tuple[int]:
-        intend_pos_on_matrix = self.__convert_pixel_position_to_matrix_position(intend_position)
-        if self.__matrix[intend_pos_on_matrix[0], intend_pos_on_matrix[1]] == 0:
-            return True
-        else:
-            return False
+        if type(intend_position) == tuple:
+            intend_pos_on_matrix = self.__convert_pixel_position_to_matrix_position(intend_position)
+            if self.__matrix[intend_pos_on_matrix[0], intend_pos_on_matrix[1]] == 0:
+                return True
+            else:
+                return False
 
     def __convert_pixel_position_to_matrix_position(self, pixel_position: tuple[int]) -> tuple[int]:
         x = pixel_position[0]
